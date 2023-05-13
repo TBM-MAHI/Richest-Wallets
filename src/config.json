@@ -1,0 +1,15 @@
+{
+    "31337": {
+        "richest": {
+            "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+        },
+        "explorerURL": "#"
+    },
+    "5": {
+        "richest": {
+            "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+        },
+        "explorerURL": "https://goerli.etherscan.io/address/"
+    }
+    
+}
