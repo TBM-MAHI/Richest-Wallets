@@ -9,7 +9,7 @@ import {
   loadContract,
   loadTopUsers
 } from "../redux-store/interactions";
-import MyNavbar from "./Navbar2";
+import MyNavbar from "./Navbar";
 import Register from "./Register";
 import TopUsersCard from "./TopUsers";
 const App = () => {
