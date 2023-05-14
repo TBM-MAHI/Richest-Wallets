@@ -5,13 +5,13 @@ import { useState } from "react";
 function Register() {
     const [ name, setName ] = useState("");
     const [email, setEmail] = useState("");
-    const [walletAddress, setAddress] = useState("");
-   
-    const contract = useSelector((state) => state.ContractReducer.tokenContr);
+  
+   const contract = useSelector((state) => state.ContractReducer.tokenContr);
     const signer = useSelector((state) => state.ProviderReducer.signer);
    
-    let handleRgister = async () => {
-        await loadRegisterUser(contract,signer, name, email, walletAddress);
+  let handleRgister = async (e) => {
+        e.preventDefault();
+        await loadRegisterUser(contract,signer, name, email);
     }
   return (
     <Container className="mt-5 mx-0" style={{ maxWidth: "500px" }}>
@@ -44,7 +44,6 @@ function Register() {
           <Form.Control
             type="text"
             placeholder="Ex: 0x845AFC.....96A"
-            onChange={(e) => setAddress(e.target.value)}
             required
           />
         </Form.Group>

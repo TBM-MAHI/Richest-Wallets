@@ -11,26 +11,31 @@ function TopUsersCard() {
   const topThreeUserArray = useSelector(
     (state) => state.UserReducer.topThreeUserArray
   );
-  console.log(topThreeUserArray);
+  console.log("top three ", topThreeUserArray);
+  
   // LOAD TOP THREE USERS
   useEffect(() => {
     console.log("fired useEffect from TopUsers");
     async function fetchData() {
       await loadTotalUsers(contract, dispatch);
-      await loadTopUsers(contract, dispatch, signer);
+     
+          await loadTopUsers(contract, dispatch, signer);
     }
     fetchData();
-  }, []);
+  }, [signer]);
 
   return (
     <Container className="mt-5 mx-0" style={{ maxWidth: "500px" }}>
       <Card style={{ width: "30rem" }}>
         <Card.Body>
-          {total && (
+          {total !== 0 ? (
             <p className="text-center fs-3">
               Total Registered User
               <span className="fw-bold"> {total}</span>
             </p>
+          ) : (
+            <p className="text-center fs-4">
+             No Users Registered </p>
           )}
           <Card.Title>Top Three Users</Card.Title>
           {topThreeUserArray ? (

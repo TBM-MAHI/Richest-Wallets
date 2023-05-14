@@ -46,11 +46,10 @@ export const loadRegisterUser = async (
   signer,
   name,
   email,
-  walletAddress
 ) => {
-  console.log(contract, name, email, walletAddress);
+  console.log(contract, name, email);
   try {
-    console.log(signer);
+    
     let transaction = await contract.connect(signer).registerUser(name, email);
     let res = await transaction.wait();
     let event = res.events[0].args;
@@ -59,7 +58,12 @@ export const loadRegisterUser = async (
     console.log(`\t Emitted event data ${event}`);
   } catch (error) {
     let { reason } = error;
-    console.log(reason.slice(reason.indexOf(" '")));
+    let { message } = error;
+
+    if (reason)
+      console.log(reason.slice(reason.indexOf(" '")));
+    else if (message)
+      console.log(message);
   }
 };
 
@@ -80,7 +84,11 @@ export const loadTopUsers = async (contract, dispatch,signer) => {
     console.log(topThreeUserArray);
     dispatch(createDispatchAction("TOP_USERS_LOADED", { topThreeUserArray }));
   } catch (error) {
-    console.log(error);
+     let { reason } = error;
+     let { message } = error;
+
+     if (reason) console.log(reason.slice(reason.indexOf(" '")));
+     else if (message) console.log(message);
   }
 };
 export const loadTotalUsers = async (contract, dispatch) => {
