@@ -47,9 +47,24 @@ export let ContractReducer = (state = { loaded: false }, action) => {
       return state;
   }
 };
-export let RegisterdReducer = (state = {}, action) => {
 
+
+export let RegisterdReducer = (state = {}, action) => {
+  let { type, payload } = action;
+  switch (type) {
+    case "USER_REGISTERD":
+      return {
+        ...state,
+        ...payload,
+        loaded: true,
+      };
+
+    default:
+      return state;
+  }
 };
+
+
 export let UserReducer = (state = {}, action) => {
   let { type, payload } = action;
   switch (type) { 

@@ -8,6 +8,7 @@ function TopUsersCard() {
   const contract = useSelector((state) => state.ContractReducer.tokenContr);
   const signer = useSelector((state) => state.ProviderReducer.signer);
   const total = useSelector((state) => state.UserReducer.total);
+  const userEventArray = useSelector((state) => state.RegisterdReducer.userEventArray);
   const topThreeUserArray = useSelector(
     (state) => state.UserReducer.topThreeUserArray
   );
@@ -18,18 +19,17 @@ function TopUsersCard() {
     console.log("fired useEffect from TopUsers");
     async function fetchData() {
       await loadTotalUsers(contract, dispatch);
-     
-          await loadTopUsers(contract, dispatch, signer);
+     await loadTopUsers(contract, dispatch, signer);
     }
     fetchData();
-  }, [signer]);
+  }, [userEventArray,signer]);
 
   return (
     <Container className="mt-5 mx-0" style={{ maxWidth: "500px" }}>
       <Card style={{ width: "30rem" }}>
         <Card.Body>
           {total !== 0 ? (
-            <p className="text-center fs-3">
+            <p className="text-center fs-4">
               Total Registered User
               <span className="fw-bold"> {total}</span>
             </p>
@@ -37,7 +37,7 @@ function TopUsersCard() {
             <p className="text-center fs-4">
              No Users Registered </p>
           )}
-          <Card.Title>Top Three Users</Card.Title>
+          <Card.Title>Top Three Wealthiest Users</Card.Title>
           {topThreeUserArray ? (
             <ListGroup variant="flush">
               {topThreeUserArray.map((ob) => (
@@ -50,7 +50,7 @@ function TopUsersCard() {
             </ListGroup>
           ) : (
             <p className="text-center fs-5 fw-normal">
-              {" "}
+              
               Please connect wallet and Sign the transaction to view Wealthiest
               accounts
             </p>

@@ -41,29 +41,22 @@ export const loadContract = async (address, dispatch, provider) => {
   return tokenContr;
 };
 
-export const loadRegisterUser = async (
-  contract,
-  signer,
-  name,
-  email,
-) => {
-  console.log(contract, name, email);
+export const loadRegisterUser = async (contract, signer, name, email, dispatch) => {
+  //console.log(contract, name, email);
   try {
-    
     let transaction = await contract.connect(signer).registerUser(name, email);
     let res = await transaction.wait();
     let event = res.events[0].args;
-    //let { walletAddress, name, email } = event;
+    // let { walletAddress, name, email } = event;
     console.log(`User registered successfully`);
     console.log(`\t Emitted event data ${event}`);
+    dispatch(createDispatchAction("USER_REGISTERD", { userEventArray:event }));
   } catch (error) {
     let { reason } = error;
     let { message } = error;
 
-    if (reason)
-      console.log(reason.slice(reason.indexOf(" '")));
-    else if (message)
-      console.log(message);
+    if (reason) console.log(reason.slice(reason.indexOf(" '")));
+    else if (message) console.log(message);
   }
 };
 
