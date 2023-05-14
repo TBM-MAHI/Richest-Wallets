@@ -7,11 +7,12 @@ import {
   loadAccount,
   loadSigner,
   loadContract,
-  loadTopUsers
+  loadTopUsers,
 } from "../redux-store/interactions";
-import MyNavbar from "./Navbar";
+import MyNavBar from "./MyNavBar";
 import Register from "./Register";
 import TopUsersCard from "./TopUsers";
+
 const App = () => {
   const dispatch = useDispatch();
   const loadBlockchainData = async () => {
@@ -23,8 +24,8 @@ const App = () => {
     //Fetch current account & balance from Metamask WHEN ACCOUNT CHANGES
     window.ethereum.on("accountsChanged", () => {
       loadAccount(provider, dispatch);
-      loadSigner( provider,dispatch);
-   });
+      loadSigner(provider, dispatch);
+    });
 
     window.ethereum.on("chainChanged", () => {
       window.location.reload();
@@ -45,7 +46,9 @@ const App = () => {
 
   return (
     <div>
-      <MyNavbar />
+      <div className="mb-5">
+        <MyNavBar/>
+      </div>
       <div className="d-flex justify-content-around">
         <TopUsersCard />
         <Register />
